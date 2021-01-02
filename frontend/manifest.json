@@ -1,0 +1,10 @@
+{
+    "name": "Veterinaria y Perruquería San Ángel",
+    "lang": "es",
+    "short_name": "Veterinaria",
+    "start_url": "/index.html",
+    "display": "standalone",
+    "background_color": "#7CACBC",
+    "theme_color": "#ffffff",
+    "orientation": "portrait-primary"
+}
