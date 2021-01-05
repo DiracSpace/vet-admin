@@ -1,34 +1,59 @@
-const fetchCitas = () => {
-    axios.get('http://127.0.0.1:8000/citas/')
+const csrftoken = Cookies.get('csrftoken');
+const baseurl = 'http://127.0.0.1:8000/';
+const config = {
+    headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+        'X-CSRFToken': csrftoken,
+    }
+}
+
+const fetchCitas = async () => {
+    await axios.get(baseurl  + 'citas/', config)
         .then((response) => {
             setupUI(response.data);
         })
         .catch((error) => {
-            if (error.name === "NetworkError") {
-                M.toast({html: 'No cuentas con conexión'});
-            } else {
-                M.toast({html: error})
-            }
+            M.toast({ html: error });
         });
 }
 
-const createCita = (cita) => {
-    axios.post('http://127.0.0.1:8000/citas/', cita)
+const fetchCitaSeleccionada = async (id) => {
+    await axios.get(baseurl + 'citas/' + id + '/', config)
         .then((response) => {
-            M.toast({html: 'Se agendó su cita'});
+            createModalElement(response.data);
         })
         .catch((error) => {
-            M.toast({html: error})
+            M.toast({ html: error });
         });
 }
 
-const createCliente = (cliente) => {
-    axios.post('http://127.0.0.1:8000/clientes/', cliente)
+const createCita = async (cita) => {
+    await axios.post(baseurl + 'citas/', cita, config)
         .then((response) => {
-            M.toast({html: 'Se agregó al cliente'});
+            M.toast({ html: 'Se agendó su cita' });
         })
         .catch((error) => {
-            M.toast({html: error});
+            M.toast({ html: error })
+        });
+}
+
+const deleteCita = async (id) => {
+    await axios.delete(baseurl + 'citas/' + id + '/', config)
+        .then((response) => {
+            M.toast({ html: 'Se eliminó la cita' });
+        })
+        .catch((error) => {
+            M.toast({ html: error });
+        });
+}
+
+const createCliente = async (cliente) => {
+    await axios.post(baseurl + 'clientes/', cliente, config)
+        .then((response) => {
+            M.toast({ html: 'Se agregó al cliente' });
+        })
+        .catch((error) => {
+            M.toast({ html: error });
         })
 }
 

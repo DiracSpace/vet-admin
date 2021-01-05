@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Veterinaria</title>
+    <link data-rh="true" rel="icon" href="../frontend/img/icons/logo.ico">
     <meta name="authors" content="aqui metemos los nombres del equipo" />
     <meta name="keywords" content="aqui metemos palabras clave del contenido" />
     <meta name="description" content="aqui metemos la descripción del proyecto" />
@@ -39,6 +40,11 @@
                     <a class="profile-pic-sidenav" href="#"><img class="circle" src="img/user-icon.webp"></a>
                     <a href="#"><span class="white-text name">Veterinaria y Perruquería San Ángel</span></a>
                 </div>
+            </li>
+            <li>
+                <a href="pages/client_list.html" class="waves-effect waves-light modal-trigger">
+                    Ver clientes
+                </a>
             </li>
             <li>
                 <a href="#registeruser" class="waves-effect waves-light modal-trigger">
@@ -82,7 +88,7 @@
         <div class="modal-content">
             <h5>Nuevo cliente</h5>
             <div class="row">
-                <form id="cliente" class="col s12">
+                <form id="cliente" class="col s12 frm">
                     <div class="row">
                         <div class="input-field">
                             <input id="propietario" type="text" class="validate">
@@ -107,9 +113,12 @@
                             <label for="email">Email</label>
                         </div>
                     </div>
-                    <button class="btn-flat waves-effect waves-light" type="submit" name="action">Aceptar</button>
                 </form>
             </div>
+        </div>
+        <div class="modal-footer">
+            <a onclick="eraseFrms();" class="modal-close waves-effect waves-red btn-flat">Cancelar</a>
+            <a id="submituser" class="modal-close waves-effect waves-green btn-flat">Aceptar</a>
         </div>
     </div>
     <!-- end  -->
@@ -118,7 +127,7 @@
         <div class="modal-content">
             <h4>Nueva cita</h4>
             <div class="row">
-                <form id="cita" class="col s12">
+                <form id="cita" class="col s12 frm">
                     <div class="row">
                         <div class="input-field">
                             <input id="paciente" type="text" class="validate">
@@ -137,9 +146,12 @@
                             <label for="motivo_visita">Motivo</label>
                         </div>
                     </div>
-                    <button class="btn-flat waves-effect waves-light" type="submit" name="action">Aceptar</button>
                 </form>
             </div>
+        </div>
+        <div class="modal-footer">
+            <a onclick="eraseFrms();" class="modal-close waves-effect waves-red btn-flat">Cancelar</a>
+            <a id="submitcita" class="modal-close waves-effect waves-green btn-flat">Aceptar</a>
         </div>
     </div>
     <!-- end -->
@@ -158,10 +170,12 @@
     <script type="text/javascript">
         document.addEventListener("DOMContentLoaded", () => {
             M.AutoInit();
+
             var elems = document.querySelectorAll('.datepicker');
             var options = {
                 format: 'yyyy-m-dd'
             };
+
             var instances = M.Datepicker.init(elems, options);
             var motivo = document.querySelectorAll('#motivo_visita');
             M.CharacterCounter.init(motivo);
@@ -169,6 +183,7 @@
     </script>
     <!-- external javascript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script type="text/javascript" src="js/methods.js"></script>
     <script type="text/javascript" src="js/ui.js"></script>
