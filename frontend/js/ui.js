@@ -1,15 +1,16 @@
 const registerdateform = document.querySelector('#cita');
 const registerclientform = document.querySelector('#cliente');
 
+/* ui logic */ 
 const createListElement = (paciente, id) => {
     const template = `
         <li class="collection-item all-rounder">
             <div>
-                <span class="align-text-icon">
+                <span onclick="fetchCitaSeleccionada(${id});" class="align-text-icon">
                     <i class="material-icons">pets</i>
                     ${paciente}
                 </span>
-                <a href="#" id="delete" class="secondary-content">
+                <a href="#" onclick="deleteCita(${id});" class="secondary-content">
                     <i class="material-icons">delete_outline</i>
                 </a>
             </div>
@@ -18,27 +19,39 @@ const createListElement = (paciente, id) => {
     return template;
 }
 
-const createModalElement = (id, motivo_visita, fecha_visita) => {
+const createModalElement = (data) => {
+    let ul = document.querySelector('.modals');
     const template = `
-        <div id="${id}" class="modal bottom-sheet">
+        <div id="${data.id}" class="modal bottom-sheet">
             <div class="modal-content">
-                <h4>Información de cita</h4>
-                <p>${motivo_visita}</p>
-                <p>${fecha_visita}</p>
+                <h3>Información de cita</h3>
+                <h5>Fecha elgida: ${data.fecha_visita}</h5>
+                <br />
+                <p class="flow-text">${data.motivo_visita}</p>
             </div>
         </div>
     `;
-    return template;
+    ul.innerHTML = template;
+    triggerModal(data.id);
+}
+
+function triggerModal(id) {
+    const elem = document.getElementById(id);
+    const instance = M.Modal.init(elem, {
+        dismissable: false,
+    });
+    instance.open();
 }
 
 const setupUI = (data) => {
-    const ul = document.querySelector('.collectionlist');
+    let ul = document.querySelector('.collectionlist');
     data.forEach(element => {
         ul.innerHTML += createListElement(element.paciente, element.id);
-    })
+    });
 }
 
-registerdateform.addEventListener('submit', e => {
+/* form logic */
+document.getElementById('submitcita').addEventListener('click', e => {
     e.preventDefault();
     const cita = {
         paciente: registerdateform['paciente'].value,
@@ -49,7 +62,7 @@ registerdateform.addEventListener('submit', e => {
     registerdateform.reset();
 });
 
-registerclientform.addEventListener('submit', e => {
+document.getElementById('submituser').addEventListener('click', e => {
     e.preventDefault();
     const cliente = {
         propietario: registerclientform['propietario'].value,
@@ -61,8 +74,7 @@ registerclientform.addEventListener('submit', e => {
     registerclientform.reset();
 });
 
-document.querySelectorAll('.delete').forEach(btn => {
-    btn.addEventListener('click', () => {
-        console.log('clicked');
-    });
-});
+function eraseFrms() {
+    registerclientform.reset();
+    registerdateform.reset();
+}
