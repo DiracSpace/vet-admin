@@ -1,8 +1,10 @@
-from api.serializers import CitasSerializer, PacientesSerializer, ClientesSerializer, CitasHoySerializer, ClientesListaSerializer
+from api.serializers import CitasSerializer, PacientesSerializer, ClientesSerializer, CitasHoySerializer
+from api.serializers import PacientesListaSerializer, ClientesListaSerializer
 from .models import Citas, Paciente, Cliente
 from rest_framework.response import Response
 from rest_framework import viewsets
 from datetime import date
+import json
 
 today = date.today()
 
@@ -18,6 +20,12 @@ class CitasViewSet(viewsets.ModelViewSet):
 class PacientesViewSet(viewsets.ModelViewSet):
     queryset = Paciente.objects.all()
     serializer_class = PacientesSerializer
+
+    def list(self, request, *args, **kwargs):
+        client_id = request.GET.get('propietario')
+        id_querset = Paciente.objects.all().filter(propietario=client_id)
+        serializer = PacientesListaSerializer(id_querset, many=True)
+        return Response(serializer.data)
 
 class ClientesViewSet(viewsets.ModelViewSet):
     queryset = Cliente.objects.all()
