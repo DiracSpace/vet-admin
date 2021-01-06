@@ -1,5 +1,21 @@
-from django.contrib.auth.models import User
 from django.db import models
+
+sex = {
+    ("macho", "macho"),
+    ("hembra", "hembra")
+}
+
+species = {
+    ("Canino", "Canino"),
+    ("Felino", "Felino"),
+}
+
+remember_date = {
+    ("Llamada", "Llamada"),
+    ("Facebook", "Facebook"),
+    ("WhatsApp", "WhatsApp"),
+    ("Correo", "Correo"),
+}
 
 class Cliente(models.Model):
     propietario = models.CharField(max_length=200, null=False, blank=False)
@@ -12,14 +28,14 @@ class Paciente(models.Model):
     nombre = models.CharField(max_length=200, null=False)
     fecha_nacimiento = models.DateField(max_length=30, null=True, blank=True)
     edad = models.CharField(max_length=100, null=False, blank=True)
-    especie = models.CharField(max_length=30, null=False, blank=True)
+    especie = models.CharField(max_length=8, choices=species, null=False, blank=True)
     raza = models.CharField(max_length=200, null=False, blank=True)
     color = models.CharField(max_length=200, null=False, blank=True)
-    sexo = models.CharField(max_length=20, null=False, blank=True)
+    sexo = models.CharField(max_length=8, choices=sex, null=False, blank=True)
     esterilizado = models.BooleanField(default=False, null=False, blank=True)
     motivo_visita = models.CharField(max_length=300, null=False, blank=True)
     recordar_cita = models.BooleanField(default=False, null=False, blank=True)
-    medio = models.CharField(max_length=200, null=False, blank=True)
+    medio = models.CharField(max_length=15, choices=remember_date, null=False, blank=True)
 
 class Citas(models.Model):
     paciente = models.CharField(max_length=200, null=False)

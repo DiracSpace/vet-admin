@@ -18,14 +18,19 @@ class CitasSerializer(serializers.ModelSerializer):
 class ClientesListaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cliente
-        fields = ['id', 'propietario', 'email']
+        fields = ['id', 'propietario']
 
 class ClientesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cliente
-        fields = ['propietario', 'domicilio', 'colonia', 'email']
+        fields = ['id', 'propietario', 'domicilio', 'colonia', 'email']
+
+class PacientesListaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Paciente
+        fields = ['id', 'nombre']
 
 class PacientesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Paciente
-        fields = ['nombre', 'fecha_nacimiento', 'edad', 'especie', 'raza', 'color', 'sexo', 'esterilizado', 'motivo_visita', 'recordar_cita', 'medio']
+        fields = ['propietario', 'nombre', 'fecha_nacimiento', 'edad', 'especie', 'raza', 'color', 'sexo', 'esterilizado', 'motivo_visita', 'recordar_cita', 'medio']

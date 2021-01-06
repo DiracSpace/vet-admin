@@ -1,6 +1,7 @@
 nav { background-color: #7CACBC !important; }
 i.starter-logo { padding-top: 1rem !important; }
 ul.with-header { margin-top: 0 !important; }
+.collection { margin: 0 !important; }
 
 .bottom-sheet {
     border-top-left-radius: 10% !important;
