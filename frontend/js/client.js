@@ -47,6 +47,16 @@ const fetchClienteSeleccionado = async (id) => {
         })
 }
 
+const fetchPacientesDeClienteSeleccionado = async (id) => {
+    await axios.get(baseurl + 'pacientes/' + '?propietario=' + id, config)
+        .then((response) => {
+            console.log(response.data);
+        })
+        .catch((error) => {
+            M.toast({ html: error });
+        });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     fetchClientes();
 });
