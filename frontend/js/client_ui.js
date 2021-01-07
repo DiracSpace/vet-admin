@@ -2,11 +2,13 @@ const registerclientform = document.querySelector('#cliente');
 
 const createListElement = (cliente) => {
     const template = `
-        <li onclick="fetchClienteSeleccionado(${cliente.id});" class="collection-item avatar">
+        <li onclick="redirect(${cliente.id});" class="collection-item avatar">
             <i class="material-icons circle">account_circle</i>
             <span class="title">#${cliente.id}</span>
             <p class="flow-text">${cliente.propietario}</p>
-            <a href="#!" onclick="deleteClient(${cliente.id});" class="secondary-content"><i class="material-icons">delete_outline</i></a>
+            <a href="#!" onclick="deleteClient(${cliente.id});" class="secondary-content">
+                <i class="material-icons">delete_outline</i>
+            </a>
         </li>
     `;
     return template;
@@ -33,4 +35,8 @@ document.getElementById('submituser').addEventListener('click', e => {
 
 function eraseFrms() {
     registerclientform.reset();
+}
+
+function redirect(id) {
+    window.location.replace('/frontend/pages/client_details.html?id=' + id);
 }
