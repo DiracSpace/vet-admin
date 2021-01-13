@@ -1,8 +1,10 @@
 const csrftoken = Cookies.get('csrftoken');
-const baseurl = 'http://127.0.0.1:8000/';
+// const baseurl = 'http://127.0.0.1:8090/';
+const baseurl = 'https://177.237.244.204:8090/';
 const config = {
     headers: {
         'Content-Type': 'application/json; charset=UTF-8',
+        'Access-Control-Allow-Origin': '*',
         'X-CSRFToken': csrftoken,
     }
 }
